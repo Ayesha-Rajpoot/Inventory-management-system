@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings - InventorHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar-dashboard">
+        <div class="nav-dash-container">
+            <div class="dash-logo">
+                <i class="fas fa-boxes"></i>
+                <span>InventorHub</span>
+            </div>
+            <div style="flex:1"></div>
+            <div class="dash-user">
+                <a href="dashboard.html" class="btn btn-outline">Back to Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard-content" style="max-width:1000px;margin:2rem auto;">
+        <div class="page-header">
+            <div class="header-left">
+                <h1>Profile Settings</h1>
+                <p>Update your personal and account details</p>
+            </div>
+        </div>
+
+        <div class="auth-form-wrapper" style="margin-top:1.5rem;">
+            <form class="auth-form">
+                <div class="form-row">
+                    <div class="form-group form-group-half">
+                        <label>First Name</label>
+                        <input type="text" value="Ayesha" />
+                    </div>
+                    <div class="form-group form-group-half">
+                        <label>Last Name</label>
+                        <input type="text" value="Yasmin" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" value="ayesha@example.com" />
+                </div>
+
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" value="+1 (234) 567-890" />
+                </div>
+
+                <div class="form-group">
+                    <label>Company</label>
+                    <input type="text" value="My Company" />
+                </div>
+
+                <button class="btn btn-primary btn-block">Save Changes</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer" style="margin-top:2rem;">
+        <div class="footer-bottom">
+            <p>&copy; 2026 InventorHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

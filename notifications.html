@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - InventorHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar-dashboard">
+        <div class="nav-dash-container">
+            <div class="dash-logo">
+                <i class="fas fa-boxes"></i>
+                <span>InventorHub</span>
+            </div>
+            <div style="flex:1"></div>
+            <div class="dash-user">
+                <a href="dashboard.html" class="btn btn-outline">Back to Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard-content" style="max-width:900px;margin:2rem auto;">
+        <div class="page-header">
+            <div class="header-left">
+                <h1>All Notifications</h1>
+                <p>Review recent alerts and system messages</p>
+            </div>
+            <div class="header-right">
+                <a href="dashboard.html" class="btn btn-outline">Mark all read</a>
+            </div>
+        </div>
+
+        <div class="notification-list" style="margin-top:1.5rem;">
+            <div class="notification-item unread">
+                <div class="notification-icon stock-add">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="notification-content">
+                    <p class="notification-title">Stock Added Successfully</p>
+                    <p class="notification-time">2 hours ago</p>
+                </div>
+            </div>
+
+            <div class="notification-item unread">
+                <div class="notification-icon low-stock">
+                    <i class="fas fa-exclamation"></i>
+                </div>
+                <div class="notification-content">
+                    <p class="notification-title">Low Stock Alert - Clothing</p>
+                    <p class="notification-time">5 hours ago</p>
+                </div>
+            </div>
+
+            <div class="notification-item">
+                <div class="notification-icon order-placed">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="notification-content">
+                    <p class="notification-title">New Order #2451 Placed</p>
+                    <p class="notification-time">8 hours ago</p>
+                </div>
+            </div>
+
+            <div class="notification-item">
+                <div class="notification-icon stock-add">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="notification-content">
+                    <p class="notification-title">Inventory synced across Warehouse B</p>
+                    <p class="notification-time">Yesterday</p>
+                </div>
+            </div>
+
+            <div class="notification-item">
+                <div class="notification-icon order-placed">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="notification-content">
+                    <p class="notification-title">Order #2448 fulfilled</p>
+                    <p class="notification-time">2 days ago</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" style="margin-top:2rem;">
+        <div class="footer-bottom">
+            <p>&copy; 2026 InventorHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

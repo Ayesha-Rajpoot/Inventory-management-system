@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing - InventorHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar-dashboard">
+        <div class="nav-dash-container">
+            <div class="dash-logo">
+                <i class="fas fa-boxes"></i>
+                <span>InventorHub</span>
+            </div>
+            <div style="flex:1"></div>
+            <div class="dash-user">
+                <a href="dashboard.html" class="btn btn-outline">Back to Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard-content" style="max-width:1000px;margin:2rem auto;">
+        <div class="page-header">
+            <div class="header-left">
+                <h1>Billing</h1>
+                <p>Manage your subscription and billing details</p>
+            </div>
+        </div>
+
+        <div class="auth-form-wrapper" style="margin-top:1.5rem;">
+            <h3>Subscription</h3>
+            <p>Current plan: <strong>Professional</strong></p>
+            <p>Next billing date: <strong>March 5, 2026</strong></p>
+
+            <h3 style="margin-top:1.25rem;">Payment Method</h3>
+            <form class="auth-form">
+                <div class="form-group">
+                    <label>Cardholder Name</label>
+                    <input type="text" value="Ayesha Yasmin" />
+                </div>
+                <div class="form-row">
+                    <div class="form-group form-group-half">
+                        <label>Card Number</label>
+                        <input type="text" value="**** **** **** 4242" />
+                    </div>
+                    <div class="form-group form-group-half">
+                        <label>Expiry</label>
+                        <input type="text" value="03/28" />
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-block">Update Payment Method</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer" style="margin-top:2rem;">
+        <div class="footer-bottom">
+            <p>&copy; 2026 InventorHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

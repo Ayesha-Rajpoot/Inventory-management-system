@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - InventorHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    <!-- Top Navigation -->
+    <nav class="navbar-dashboard">
+        <div class="nav-dash-container">
+            <div class="dash-logo">
+                <i class="fas fa-boxes"></i>
+                <span>InventorHub</span>
+            </div>
+            <div class="dash-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search products, categories...">
+            </div>
+            <div class="dash-user">
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </button>
+                <div id="notificationPanel" class="notification-panel">
+                    <div class="notification-header">
+                        <h3>Notifications</h3>
+                        <button class="close-notification" onclick="toggleNotifications()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="notification-list">
+                        <div class="notification-item unread">
+                            <div class="notification-icon stock-add">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="notification-content">
+                                <p class="notification-title">Stock Added Successfully</p>
+                                <p class="notification-time">2 hours ago</p>
+                            </div>
+                        </div>
+                        <div class="notification-item unread">
+                            <div class="notification-icon low-stock">
+                                <i class="fas fa-exclamation"></i>
+                            </div>
+                            <div class="notification-content">
+                                <p class="notification-title">Low Stock Alert - Clothing</p>
+                                <p class="notification-time">5 hours ago</p>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon order-placed">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="notification-content">
+                                <p class="notification-title">New Order #2451 Placed</p>
+                                <p class="notification-time">8 hours ago</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notification-footer">
+                        <a href="notifications.html">View All Notifications →</a>
+                    </div>
+                </div>
+                <div class="user-profile">
+                    <div class="profile-pic-wrapper">
+                        <div class="profile-pic" id="userAvatar">
+                            <span>AY</span>
+                        </div>
+                    </div>
+                    <div class="dropdown" id="userDropdown">
+                        <a href="profile.html">Profile Settings</a>
+                        <a href="billing.html">Billing</a>
+                        <a href="team.html">Team Members</a>
+                        <a href="#" class="logout-link" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3>Menu</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="dashboard" onclick="switchSection(event, 'dashboard')">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="inventory" onclick="switchSection(event, 'inventory')">
+                    <i class="fas fa-boxes"></i>
+                    <span>Inventory</span>
+                </a>
+                <a href="#" class="nav-item" data-section="products" onclick="switchSection(event, 'products')">
+                    <i class="fas fa-cube"></i>
+                    <span>Products</span>
+                </a>
+                <a href="#" class="nav-item" data-section="categories" onclick="switchSection(event, 'categories')">
+                    <i class="fas fa-list"></i>
+                    <span>Categories</span>
+                </a>
+                <a href="#" class="nav-item" data-section="orders" onclick="switchSection(event, 'orders')">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Orders</span>
+                </a>
+                <a href="#" class="nav-item" data-section="reports" onclick="switchSection(event, 'reports')">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="#" class="nav-item" data-section="suppliers" onclick="switchSection(event, 'suppliers')">
+                    <i class="fas fa-truck"></i>
+                    <span>Suppliers</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item" data-section="settings" onclick="switchSection(event, 'settings')">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="dashboard-section active">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="header-left">
+                        <h1>Dashboard</h1>
+                        <p>Welcome back! Here's your inventory overview</p>
+                    </div>
+                    <div class="header-right">
+                        <select class="date-filter">
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                            <option>Last 3 months</option>
+                            <option>This year</option>
+                        </select>
+                    </div>
+                </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-cards-grid">
+                <div class="stat-card-dashboard hover-lift">
+                    <div class="stat-card-header">
+                        <h3>Total Products</h3>
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <div class="stat-card-value">
+                        <h2>2,450</h2>
+                        <p class="stat-change up">
+                            <i class="fas fa-arrow-up"></i> 12% from last month
+                        </p>
+                    </div>
+                </div>
+
+                <div class="stat-card-dashboard hover-lift">
+                    <div class="stat-card-header">
+                        <h3>Low Stock Items</h3>
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="stat-card-value">
+                        <h2>47</h2>
+                        <p class="stat-change down">
+                            <i class="fas fa-arrow-down"></i> 5% from last week
+                        </p>
+                    </div>
+                </div>
+
+                <div class="stat-card-dashboard hover-lift">
+                    <div class="stat-card-header">
+                        <h3>Total Value</h3>
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-card-value">
+                        <h2>$284,500</h2>
+                        <p class="stat-change up">
+                            <i class="fas fa-arrow-up"></i> 8% increase
+                        </p>
+                    </div>
+                </div>
+
+                <div class="stat-card-dashboard hover-lift">
+                    <div class="stat-card-header">
+                        <h3>Active Orders</h3>
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="stat-card-value">
+                        <h2>156</h2>
+                        <p class="stat-change up">
+                            <i class="fas fa-arrow-up"></i> 3% more orders
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-grid">
+                <!-- Sales Chart -->
+                <div class="chart-card hover-lift">
+                    <div class="chart-header">
+                        <h3>Sales Trend</h3>
+                        <div class="chart-options">
+                            <button class="chart-btn" data-period="day" onclick="updateChart('day')">Day</button>
+                            <button class="chart-btn active" data-period="week" onclick="updateChart('week')">Week</button>
+                            <button class="chart-btn" data-period="month" onclick="updateChart('month')">Month</button>
+                        </div>
+                    </div>
+                    <div class="chart-placeholder">
+                        <svg id="chartSvg" viewBox="0 0 400 200" class="chart-svg">
+                            <polyline id="chartLine" points="0,150 50,100 100,120 150,80 200,60 250,90 300,50 350,70 400,40" 
+                                      fill="none" stroke="#6366f1" stroke-width="3"/>
+                            <polyline id="chartArea" points="0,150 50,100 100,120 150,80 200,60 250,90 300,50 350,70 400,40" 
+                                      fill="url(#gradient)" opacity="0.3"/>
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#6366f1;stop-opacity:0.3" />
+                                    <stop offset="100%" style="stop-color:#6366f1;stop-opacity:0" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Category Distribution -->
+                <div class="chart-card hover-lift">
+                    <div class="chart-header">
+                        <h3>Category Distribution</h3>
+                        <i class="fas fa-ellipsis-v"></i>
+                    </div>
+                    <div class="category-list">
+                        <div class="category-item">
+                            <div class="category-info">
+                                <span>Electronics</span>
+                                <span class="percentage">45%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%; background: linear-gradient(90deg, #6366f1, #818cf8);"></div>
+                            </div>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-info">
+                                <span>Clothing</span>
+                                <span class="percentage">28%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 28%; background: linear-gradient(90deg, #ec4899, #f472b6);"></div>
+                            </div>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-info">
+                                <span>Furniture</span>
+                                <span class="percentage">15%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 15%; background: linear-gradient(90deg, #10b981, #34d399);"></div>
+                            </div>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-info">
+                                <span>Others</span>
+                                <span class="percentage">12%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 12%; background: linear-gradient(90deg, #f59e0b, #fbbf24);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="activity-section hover-lift">
+                <div class="activity-header">
+                    <h3>Recent Activity</h3>
+                    <a href="#" class="view-all" onclick="switchSection(event, 'reports')">View All →</a>
+                </div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon stock-add">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="activity-details">
+                            <p class="activity-title">Stock Added - Electronics</p>
+                            <p class="activity-time">2 hours ago</p>
+                        </div>
+                        <span class="activity-value">+250 units</span>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon order-placed">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="activity-details">
+                            <p class="activity-title">New Order #2451</p>
+                            <p class="activity-time">4 hours ago</p>
+                        </div>
+                        <span class="activity-value">$2,450</span>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon low-stock">
+                            <i class="fas fa-exclamation"></i>
+                        </div>
+                        <div class="activity-details">
+                            <p class="activity-title">Low Stock Alert - Clothing</p>
+                            <p class="activity-time">5 hours ago</p>
+                        </div>
+                        <span class="activity-value">⚠ 23 items</span>
+                    </div>
+                </div>
+            </div>
+            </section>
+
+            <!-- Inventory Section -->
+            <section id="inventory-section" class="dashboard-section">
+                <div class="page-header">
+                    <h1>Inventory Management</h1>
+                    <p>Manage and track your inventory items</p>
+                </div>
+                <div class="content-placeholder">
+                    <i class="fas fa-boxes"></i>
+                    <h2>Inventory</h2>
+                    <p>Track stock levels, manage locations, and monitor item movement</p>
+                    <div class="placeholder-grid">
+                        <div class="placeholder-card">
+                            <i class="fas fa-cube"></i>
+                            <h3>Total SKUs</h3>
+                            <p>2,450 items in stock</p>
+                        </div>
+                        <div class="placeholder-card">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Low Stock</h3>
+                            <p>47 items need restocking</p>
+                        </div>
+                        <div class="placeholder-card">
+                            <i class="fas fa-map-marker"></i>
+                            <h3>Locations</h3>
+                            <p>Across 5 warehouses</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Products Section -->
+            <section id="products-section" class="dashboard-section">
+                <div class="page-header">
+                    <h1>Products</h1>
+                    <p>View and manage your product catalog</p>
+                </div>
+                <div class="content-placeholder">
+                    <i class="fas fa-cube"></i>
+                    <h2>Products Catalog</h2>
+                    <p>Manage product details, pricing, and categories</p>
+                    <div class="placeholder-grid">
+                        <div class="placeholder-card">
+                            <i class="fas fa-tag"></i>
+                            <h3>Categories</h3>
+                            <p>8 product categories</p>
+                        </div>
+                        <div class="placeholder-card">
+                            <i class="fas fa-dollar-sign"></i>
+                            <h3>Pricing</h3>
+                            <p>Manage product prices</p>
+                        </div>
+                        <div class="placeholder-card">
+                            <i class="fas fa-image"></i>
+                            <h3>Images</h3>
+                            <p>Update product visuals</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categories Section -->
+            <section id="categories-section" class="dashboard-section">
+                <div class="page-header">
+                    <h1>Categories</h1>
+                    <p>Organize your product categories</p>
+                </div>
+                <div class="content-placeholder">
+                    <i class="fas fa-list"></i>
+                    <h2>Product Categories</h2>
+                    <p>Create and manage product categories</p>
+                    <div class="placeholder-grid">
+                        <div class="placeholder-card">
+                            <i class="fas fa-laptop"></i>
+                            <h3>Electronics</h3>
+                            <p>450 products</p>
+                        </div>
+                        <div class="placeholder-card">
+                            <i class="fas fa-shirt"></i>
+                            <h3>Clothing</h3>
+                            <p>280 products</p>
+                        </div>
+                        <div class="placeholder-card">
+                            <i class="fas fa-couch"></i>
+                            <h3>Furniture</h3>
+                            <p>150 products</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Orders Section -->
+            <section id="orders-section" class="dashboard-section">
+                <div class="page-header">
+                    <h1>Orders</h1>
+                    <p>Track and manage customer orders</p>
+                </div>
+                <div class="content-placeholder">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h2>Order Management</h2>
+                    <p>View, process, and track customer orders</p>
+                    <div class="placeholder-grid">
+                        <div class="placeholder-card">
+                            <i class="fas fa-check-circle"></i>
+                            <h3>Completed</h3>
+                            <p>1,250 orders</p>
+                        </div>
+                        <div class="placeholder-card">
+                            <i class="fas fa-clock"></i>
+                            <h3>Pending</h3>
+                            <p>47 orders</p>
+                        </div>
+                        <div class="placeholder-card">
+                            <i class="fas fa-ban"></i>
+                            <h3>Cancelled</h3>
+                            <p>12 orders</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports-section" class="dashboard-section">
+                <div class="page-header">
+                    <h1>Reports</h1>
+                    <p>Analyze business performance and trends</p>
+                </div>
+                <div class="content-placeholder">
+                    <i class="fas fa-chart-bar"></i>
+                    <h2>Analytics & Reports</h2>
+                    <p>View detailed reports and business insights</p>
+                    <div class="placeholder-grid">
+                        <div class="placeholder-card">
+                            <i class="fas fa-line-chart"></i>
+                            <h3>Sales Report</h3>
+                            <p>Monthly revenue analysis</p>
+                        </div>
+                        <div class="placeholder-card">
+                            <i class="fas fa-pie-chart"></i>
+                            <h3>Category Report</h3>
+                            <p>Category performance</p>
+                        </div>
+                        <div class="placeholder-card">
+                            <i class="fas fa-user-chart"></i>
+                            <h3>Customer Report</h3>
+                            <p>Customer analytics</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Suppliers Section -->
+            <section id="suppliers-section" class="dashboard-section">
+                <div class="page-header">
+                    <h1>Suppliers</h1>
+                    <p>Manage supplier relationships and orders</p>
+                </div>
+                <div class="content-placeholder">
+                    <i class="fas fa-truck"></i>
+                    <h2>Supplier Management</h2>
+                    <p>Track suppliers, manage orders, and monitor deliveries</p>
+                    <div class="placeholder-grid">
+                        <div class="placeholder-card">
+                            <i class="fas fa-building"></i>
+                            <h3>Active Suppliers</h3>
+                            <p>24 suppliers</p>
+                        </div>
+                        <div class="placeholder-card">
+                            <i class="fas fa-package"></i>
+                            <h3>Pending Orders</h3>
+                            <p>8 orders</p>
+                        </div>
+                        <div class="placeholder-card">
+                            <i class="fas fa-star"></i>
+                            <h3>Top Supplier</h3>
+                            <p>XYZ Logistics</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" class="dashboard-section">
+                <div class="page-header">
+                    <h1>Settings</h1>
+                    <p>Configure your account and preferences</p>
+                </div>
+                <div class="content-placeholder">
+                    <i class="fas fa-cog"></i>
+                    <h2>Account Settings</h2>
+                    <p>Manage your profile, security, and preferences</p>
+                    <div class="placeholder-grid">
+                        <div class="placeholder-card">
+                            <i class="fas fa-user"></i>
+                            <h3>Profile</h3>
+                            <p>Update profile information</p>
+                        </div>
+                        <div class="placeholder-card">
+                            <i class="fas fa-lock"></i>
+                            <h3>Security</h3>
+                            <p>Change password & 2FA</p>
+                        </div>
+                        <div class="placeholder-card">
+                            <i class="fas fa-bell"></i>
+                            <h3>Notifications</h3>
+                            <p>Notification preferences</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Switch Section Function
+        function switchSection(event, sectionName) {
+            event.preventDefault();
+
+            // Hide all sections
+            const sections = document.querySelectorAll('.dashboard-section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Show selected section
+            const selectedSection = document.getElementById(sectionName + '-section');
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+            }
+
+            // Update active nav item
+            const navItems = document.querySelectorAll('.sidebar-nav .nav-item, .sidebar-footer .nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            const activeNavItem = document.querySelector(`[data-section="${sectionName}"]`);
+            if (activeNavItem) {
+                activeNavItem.classList.add('active');
+            }
+        }
+
+        // Dashboard initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            const userName = localStorage.getItem('userName') || 'Ayesha';
+            const userInitials = userName.split(' ').map(n => n[0]).join('').toUpperCase();
+            const userAvatar = document.getElementById('userAvatar');
+            if (userAvatar) {
+                userAvatar.textContent = userInitials;
+            }
+            console.log(`Welcome, ${userName}!`);
+        });
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+
+        // Notification Toggle
+        function toggleNotifications() {
+            const panel = document.getElementById('notificationPanel');
+            panel.classList.toggle('active');
+        }
+
+        const notificationBtn = document.getElementById('notificationBtn');
+        if (notificationBtn) {
+            notificationBtn.addEventListener('click', toggleNotifications);
+        }
+
+        // Close notification panel when clicking outside
+        document.addEventListener('click', (e) => {
+            const panel = document.getElementById('notificationPanel');
+            const btn = document.getElementById('notificationBtn');
+            if (panel && btn && !panel.contains(e.target) && !btn.contains(e.target)) {
+                panel.classList.remove('active');
+            }
+        });
+
+        // Chart Data
+        const chartData = {
+            day: {
+                points: "0,180 30,140 60,160 90,110 120,90 150,130 180,85 210,110 240,75 270,95 300,60 330,80 360,50 400,30",
+                label: "Daily Sales"
+            },
+            week: {
+                points: "0,150 50,100 100,120 150,80 200,60 250,90 300,50 350,70 400,40",
+                label: "Weekly Sales"
+            },
+            month: {
+                points: "0,140 50,110 100,95 150,85 200,70 250,60 300,50 350,45 400,40",
+                label: "Monthly Sales"
+            }
+        };
+
+        // Update Chart Function
+        function updateChart(period) {
+            const chartLine = document.getElementById('chartLine');
+            const chartArea = document.getElementById('chartArea');
+            const buttons = document.querySelectorAll('.chart-btn');
+
+            if (!chartData[period]) return;
+
+            // Update active button
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-period') === period) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Animate the chart change
+            chartLine.style.opacity = '0';
+            chartArea.style.opacity = '0';
+
+            setTimeout(() => {
+                chartLine.setAttribute('points', chartData[period].points);
+                chartArea.setAttribute('points', chartData[period].points);
+                chartLine.style.opacity = '1';
+                chartArea.style.opacity = '0.3';
+            }, 200);
+
+            chartLine.style.transition = 'opacity 0.2s ease-out';
+            chartArea.style.transition = 'opacity 0.2s ease-out';
+
+            setTimeout(() => {
+                chartLine.style.transition = 'none';
+                chartArea.style.transition = 'none';
+            }, 400);
+        }
+    </script>
+</body>
+</html>
